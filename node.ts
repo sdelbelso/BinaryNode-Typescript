@@ -1,7 +1,7 @@
 interface INode {
-	left: INode,
-	right: INode,
-	value: number
+	left: INode;
+	right: INode;
+	value: number;
 }
 
 class Node {
@@ -24,7 +24,7 @@ class Node {
 		return this.value;
 	}
 	
-	findNode(root: INode, val: number): INode {
+	public findNode(root: INode, val: number): INode {
 		// base case
 		if (root === null) {
 			return null;
@@ -37,5 +37,18 @@ class Node {
 		} else { // root.value > val -- we are assuming here that this tree has no duplicate values
 			return findNode(root.left, val);
 		}
+	}
+	
+	public insertNode(root: INode, val: number): INode {
+		if (root === null) {
+			root = new Node(null, null, val);
+			return root;
+		}
+		if (root.value < val) {
+			root.right = insertNode(root.right, val);
+		} else {
+			root.left = insertNode(root.left, val);
+		}
+		return root;
 	}
 }
